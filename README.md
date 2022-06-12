@@ -7,7 +7,11 @@ conda install -c conda-forge mamba
 mamba env update -f requirements.yml -n virpool
 ```
 
+## Usage
+
 See `examples/` for examples of usage.
+
+For a detailed interface description, use `virpool -h`.
 
 ## Profile estimation
 
