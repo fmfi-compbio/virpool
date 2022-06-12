@@ -9,5 +9,5 @@ wget -O reads.fastq.gz --retry-connrefused ftp.sra.ebi.ac.uk/vol1/fastq/SRR152/0
 minimap2 -ax map-ont  -t 4 ../../data/genome.fa reads.fastq.gz | samtools sort -o reads.bam
 
 conda activate virpool
-../../src/virpool -v ../../data/niw_2019-01-01_2021-03-31.tsv -g ../../data/genome.fa -m ../../data/ont-short.masking.vcf reads.bam
+../../src/virpool -v ../../profiles/niw_2019-01-01_2021-03-31.tsv -g ../../data/genome.fa -m ../../data/ont-short.masking.vcf reads.bam
 ```

@@ -31,7 +31,7 @@ Then, the profile is calculated by a following command:
 conda activate virpool
 
 cd profiles
-python ../src/profile_estimation.py variant_list.txt ../data/aliases.json metadata.tsv gisaid.cram \
+python ../src/profile_estimation.py variant_list.txt aliases.json metadata.tsv gisaid.cram \
     --reference ../data/genome.fa \
     -o profile_name.tsv \
     --date-min 2020-01-01 \
