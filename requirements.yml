@@ -1,0 +1,17 @@
+name: covid-pooling2
+channels:
+  - numba
+  - conda-forge
+  - bioconda
+  - r
+  - defaults
+dependencies:
+  - numpy
+  - scipy
+  - argh
+  - pyyaml
+  - matplotlib
+  - pysam
+  - python=3.9
+  - pathos
+  - numba

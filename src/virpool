@@ -1,0 +1,98 @@
+#!/usr/bin/env python
+
+from datetime import datetime
+import logging
+
+import argh
+import os
+
+import yaml
+
+import helpers
+from helpers import load_variants_with_simple_alphabet, load_alignments, load_virus_genome
+from plot_posterior_coverage import plot_posterior_coverage
+from plot_significant_coverage import find_significant_positions, plot_significant_coverage
+from posteriors_simple import posteriors_simple, dump_posteriors_as_np
+from predictor_whole_reads import find_best_weights, estimate_weights_multiple_tries
+
+DEFAULT_GENOME = "resources/genome.fa"
+DEFAULT_VARIANT = "resources/variants.tsv"
+DEFAULT_OUTPUT_DIR = f"results-{datetime.now().strftime('%Y%m%dT%H%M%S')}"
+
+
+@argh.arg("reads", help="SAM/BAM file with reads from a mixed sample")
+@argh.arg("-o", "--output-dir", help="Output directory")
+@argh.arg("-v", "--variants", help="TSV file with variant profiles")
+@argh.arg("-g", "--genome", help="FASTA file with the virus genome")
+@argh.arg("-s", "--subst-rate", help="Substitution error rate (suggested value: 0.05 for ONT reads, 0.001 for "
+                                     "Illumina reads)")
+@argh.arg("-t", "--threads", help="Number of threads to use during posteriors computation")
+@argh.arg("-n", "--tries", help="Number of reruns of the optimisation")
+@argh.arg("-cs", "--clipping-start", type=int, help="Number of ignored bases from the start of the ref. sequence")
+@argh.arg("-ce", "--clipping-end", type=int, help="Number of ignored bases from the end of the ref. sequence")
+@argh.arg("-m", "--masking-vcf", help="VCF file with positions to be masked (e.g. homeoplasic sites or primers); "
+                                      "the sixth column should contain keyword 'mask'")
+@argh.arg("--percentile", help="Punish gaps with coverage < `percentile` quantile for the given variant")
+def main(reads,
+         output_dir=DEFAULT_OUTPUT_DIR,
+         variants=DEFAULT_VARIANT,
+         genome=DEFAULT_GENOME,
+         subst_rate: float = 0.05,
+         threads: int = 10,
+         tries: int = 5,
+         clipping_start: int = 0,
+         clipping_end: int = 0,
+         masking_vcf=None,
+         percentile: float = 0.0):
+    #  some constants
+    weights_output_filename = os.path.join(output_dir, "estimated_weights.yaml")
+    plot_posterior_output_filename = os.path.join(output_dir, "posterior_coverage.svg")
+    plot_significant_output_filename = os.path.join(output_dir, "significant_positions.svg")
+
+    # load input data
+    variant_names, table = helpers.load_variants_with_simple_alphabet_punish_gaps(variants, percentile)
+    alignments = list(load_alignments(reads))
+    genome_seq = load_virus_genome(genome)
+    genome_length = len(genome_seq)
+
+    if masking_vcf is not None:
+        with open(masking_vcf) as f:
+            masked_positions = helpers.load_masked_positions(f)
+    else:
+        masked_positions = None
+
+    #  create output directory
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    #  calculate posteriors
+    clipping_end = genome_length - clipping_end
+    merged_posteriors = posteriors_simple(alignments=alignments, variant_table=table,
+                                          subst_rate=subst_rate, threads=threads,
+                                          clipping_start=clipping_start, clipping_end=clipping_end,
+                                          masked_positions=masked_positions)
+    identifiers, posteriors = dump_posteriors_as_np(merged_posteriors)
+
+    #  optimise model
+    results = estimate_weights_multiple_tries(posteriors, tries)
+    best_weights, best_fun = find_best_weights(results)
+
+    #  print estimated weights to output
+    result = {variant_names[i]: float(best_weights[i]) for i in range(len(variant_names))}
+
+    with open(weights_output_filename, "w") as f:
+        yaml.dump(result, f)
+
+    #  plot posterior coverage
+    fig, ax = plot_posterior_coverage(alignments, genome_length, identifiers, posteriors, variant_names)
+    fig.savefig(plot_posterior_output_filename, bbox_inches="tight")
+
+    #  plot coverage for significant positions
+    significant_positions = find_significant_positions(genome_seq, table)
+    fig, ax = plot_significant_coverage(alignments, genome_seq, identifiers, posteriors, significant_positions,
+                                        variant_names)
+    fig.savefig(plot_significant_output_filename, bbox_inches="tight")
+
+
+if __name__ == "__main__":
+    argh.dispatch_command(main)
