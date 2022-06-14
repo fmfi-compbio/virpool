@@ -17,6 +17,8 @@ TODO description of usage
 
 ## Profile estimation
 
+TODO add description of already provided profiles.
+
 ### Download GISAID data
 
 TODO into folder `profiles/`, files `metadata.tsv` and `gisaid.cram`
