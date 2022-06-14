@@ -13,6 +13,8 @@ See `examples/` for examples of usage.
 
 For a detailed interface description, use `virpool -h`.
 
+TODO description of usage
+
 ## Profile estimation
 
 ### Download GISAID data
