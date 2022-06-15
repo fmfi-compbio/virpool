@@ -29,7 +29,7 @@ The output will be stored in directory `results`, with three files:
 
 ### All options available
 
-```bash
+```
 usage: virpool [-h] [-o OUTPUT_DIR] [-v VARIANTS] [-g GENOME] [-s SUBST_RATE]
                [-t THREADS] [-n TRIES] [-cs CLIPPING_START]
                [-ce CLIPPING_END] [-m MASKING_VCF] [--percentile PERCENTILE]
