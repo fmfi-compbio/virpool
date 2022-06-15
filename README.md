@@ -76,12 +76,14 @@ See `examples/` for examples of usage.
 
 ## Variant profiles
 
-### A list of provided variant profiles in directory `profiles/`:
+A list of provided variant profiles in directory `profiles/` (the date range of GISAID sequences used to create the profiles is denoted in the filenames):
 
-- `austria_2020-11-01_2021-03-31.tsv` - variant profiles used in analysis of Austrian wastewater data by Amman et al. 2022
-- `niw_2019-01-01_2021-03-31.tsv` - variant profiles used in analysis of Nice, France wastewater data by Rios et al. 2021
-- ... - variant profiles used in ...
-- ...
+- `synthetic_2019-01-01_2021-01-31.tsv` - variant profiles used in the synthetic and in vitro experiments with data from Fall 2020 (Figures 1 and 2; Tables 1 and 2)
+- `alpha-delta_2021-04-01_2021-06-30.tsv` - variant profiles used in synthetic experiments of determination of a minor variant between alpha and delta (Figure 3)
+- `delta-omicron_2021-11-01_2022-01-31.tsv` - variant profiles used in synthetic experiments of determination of a minor variant between alpha and delta (Figure 4)
+- `austria_2020-11-01_2021-03-31.tsv` - variant profiles used in analysis of Austrian wastewater data by Amman et al. 2022 (Figure 5)
+- `niw_2019-01-01_2021-03-31.tsv` - variant profiles used in analysis of Nice, France wastewater data by Rios et al. 2021 (Figure 6)
+
 
 ### Composition of a variant profile file
 
