@@ -74,13 +74,34 @@ optional arguments:
 
 See `examples/` for examples of usage.
 
+## Variant profiles
 
+### A list of provided variant profiles in directory `profiles/`:
 
-## Profile estimation
+- `austria_2020-11-01_2021-03-31.tsv` - variant profiles used in analysis of Austrian wastewater data by Amman et al. 2022
+- `niw_2019-01-01_2021-03-31.tsv` - variant profiles used in analysis of Nice, France wastewater data by Rios et al. 2021
+- ... - variant profiles used in ...
+- ...
 
-TODO add description of already provided profiles.
+### Composition of a variant profile file
+
+Each line describes the frequency of a particular base at a specific position in a specific variant.
+E.g. these four lines describe the frequencies of alpha variant at position 18537 (0-based):
+
+```
+B.1.1.7	18537	A	11
+B.1.1.7	18537	C	0
+B.1.1.7	18537	G	82100
+B.1.1.7	18537	T	35
+```
+
+The columns are tab-serarated. Numbers don't have to be normalized to sum up to 1 for each position and variant (e.g. here we are using numbers of sequences in GISAID with such mutation without any normalization).
+
+## Creating a custom variant profile
 
 ### Download GISAID data
+
+@Brona
 
 TODO into folder `profiles/`, files `metadata.tsv` and `gisaid.cram`
 
