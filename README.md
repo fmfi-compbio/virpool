@@ -72,17 +72,19 @@ optional arguments:
 
 ```
 
+### Example of usage on wastewater data from Nice, France (Rios et al., 2021)
+
 See `examples/` for examples of usage.
 
 ## Variant profiles
 
 A list of provided variant profiles in directory `profiles/` (the date range of GISAID sequences used to create the profiles is denoted in the filenames):
 
-- `synthetic_2019-01-01_2021-01-31.tsv` - variant profiles used in the synthetic and in vitro experiments with data from Fall 2020 (Figures 1 and 2; Tables 1 and 2)
-- `alpha-delta_2021-04-01_2021-06-30.tsv` - variant profiles used in synthetic experiments of determination of a minor variant between alpha and delta (Figure 3)
-- `delta-omicron_2021-11-01_2022-01-31.tsv` - variant profiles used in synthetic experiments of determination of a minor variant between alpha and delta (Figure 4)
-- `austria_2020-11-01_2021-03-31.tsv` - variant profiles used in analysis of Austrian wastewater data by Amman et al. 2022 (Figure 5)
-- `niw_2019-01-01_2021-03-31.tsv` - variant profiles used in analysis of Nice, France wastewater data by Rios et al. 2021 (Figure 6)
+- `synthetic_2019-01-01_2021-01-31.tsv` - variant profiles used in the synthetic and in vitro experiments with data from Fall 2020 (Figures 1 and 2; Tables 1 and 2) (variants B.1.1.7, B.1.160, B.1.258, B.1.177)
+- `alpha-delta_2021-04-01_2021-06-30.tsv` - variant profiles used in synthetic experiments of determination of a minor variant between alpha and delta (Figure 3) (variants B.1.1.7, B.1.617.2)
+- `delta-omicron_2021-11-01_2022-01-31.tsv` - variant profiles used in synthetic experiments of determination of a minor variant between alpha and delta (Figure 4) (variants B.1.617.2, B.1.1.529)
+- `austria_2020-11-01_2021-03-31.tsv` - variant profiles used in analysis of Austrian wastewater data by Amman et al. 2022 (Figure 5) (variants B.1.1.7, B.1.160, B.1.258, B.1.177, B.1.351)
+- `niw_2019-01-01_2021-03-31.tsv` - variant profiles used in analysis of Nice, France wastewater data by Rios et al. 2021 (Figure 6) (variants P.1, B.1.351, B.1.221, A.27, B.1.474, B.1.367, B.1.177, B.1.160, B.1.1.7)
 
 
 ### Composition of a variant profile file
