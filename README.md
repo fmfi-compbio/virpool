@@ -29,7 +29,7 @@ The output will be stored in directory `results`, with three files:
 
 ### All options available
 
-```bash
+```
 usage: virpool [-h] [-o OUTPUT_DIR] [-v VARIANTS] [-g GENOME] [-s SUBST_RATE]
                [-t THREADS] [-n TRIES] [-cs CLIPPING_START]
                [-ce CLIPPING_END] [-m MASKING_VCF] [--percentile PERCENTILE]
@@ -72,15 +72,40 @@ optional arguments:
 
 ```
 
+### Example of usage on wastewater data from Nice, France (Rios et al., 2021)
+
 See `examples/` for examples of usage.
 
+## Variant profiles
+
+A list of provided variant profiles in directory `profiles/` (the date range of GISAID sequences used to create the profiles is denoted in the filenames):
+
+- `synthetic_2019-01-01_2021-01-31.tsv` - variant profiles used in the synthetic and in vitro experiments with data from Fall 2020 (Figures 1 and 2; Tables 1 and 2) (variants B.1.1.7, B.1.160, B.1.258, B.1.177)
+- `alpha-delta_2021-04-01_2021-06-30.tsv` - variant profiles used in synthetic experiments of determination of a minor variant between alpha and delta (Figure 3) (variants B.1.1.7, B.1.617.2)
+- `delta-omicron_2021-11-01_2022-01-31.tsv` - variant profiles used in synthetic experiments of determination of a minor variant between alpha and delta (Figure 4) (variants B.1.617.2, B.1.1.529)
+- `austria_2020-11-01_2021-03-31.tsv` - variant profiles used in analysis of Austrian wastewater data by Amman et al. 2022 (Figure 5) (variants B.1.1.7, B.1.160, B.1.258, B.1.177, B.1.351)
+- `niw_2019-01-01_2021-03-31.tsv` - variant profiles used in analysis of Nice, France wastewater data by Rios et al. 2021 (Figure 6) (variants P.1, B.1.351, B.1.221, A.27, B.1.474, B.1.367, B.1.177, B.1.160, B.1.1.7)
 
 
-## Profile estimation
+### Composition of a variant profile file
 
-TODO add description of already provided profiles.
+Each line describes the frequency of a particular base at a specific position in a specific variant.
+E.g. these four lines describe the frequencies of alpha variant at position 18537 (0-based):
+
+```
+B.1.1.7	18537	A	11
+B.1.1.7	18537	C	0
+B.1.1.7	18537	G	82100
+B.1.1.7	18537	T	35
+```
+
+The columns are tab-serarated. Numbers don't have to be normalized to sum up to 1 for each position and variant (e.g. here we are using numbers of sequences in GISAID with such mutation without any normalization).
+
+## Creating a custom variant profile
 
 ### Download GISAID data
+
+@Brona
 
 TODO into folder `profiles/`, files `metadata.tsv` and `gisaid.cram`
 
