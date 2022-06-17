@@ -7,12 +7,18 @@ conda install -c conda-forge mamba # mamba is used to speed up the installation
 mamba env update -f requirements.yml -n virpool
 ```
 
+Test run on a minimal toy example:
+```bash
+conda activate virpool
+python3 src/virpool -g examples/minimal_example/genome.fa -v examples/minimal_example/variants.tsv examples/minimal_example/reads.sam
+```
+
 ## Usage
 
 ### Simplest case
 
 ```bash
-covid activate virpool
+conda activate virpool
 python src/virpool -v variants.tsv -g genome.fa -m masking.vcf -o results reads.bam
 ```
 
