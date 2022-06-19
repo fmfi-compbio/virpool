@@ -129,7 +129,7 @@ From GISAID, download metadata and sequences, both are distributed in tar.xf fil
 ```bash
 ../src/gisaid/process_gisaid.pl metadata_tsv_2022_04_25.tar.xz sequences_fasta_2022_04_25.tar.xz metadata_sample.tsv gisaid_sample.fasta.gz
 
-minimap2 -a -x asm5 -t 8 ../../data/genome.fa  gisiad_sample.fasta.gz | samtools view -S -C -T ../data/genome.fa - > gisaid_sample.cram
+minimap2 -a -x asm5 -t 8 ../data/genome.fa  gisaid_sample.fasta.gz | samtools view -S -C -T ../data/genome.fa - > gisaid_sample.cram
 ```
 
 ### Estimate a profile
