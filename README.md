@@ -29,7 +29,7 @@ The output will be stored in directory `results`, with three files:
    `variants.tsv` file
 2. `posterior_coverage.svg` - a plot showing the coverage by reads with high posterior probability
    of belonging to a particular variant
-3. `significant_positions.tsv` - a plot showing the coverage by reads on positions with singificant
+3. `significant_positions.tsv` - a plot showing the coverage by reads on positions with significant
    changes betweeen a given variant and the rest.
 
 
@@ -124,9 +124,13 @@ The columns are tab-serarated. Numbers don't have to be normalized to sum up to 
 
 ### Download GISAID data
 
-@Brona
+From GISAID, download metadata and sequences, both are distributed in tar.xf files. Place them in profiles folder. Run `process_gisaid.pl` script as indicated below, to extract a sample of the data and do necessary preprocessing. This will create files `gisaid_sample.fasta.gz` and `metadata_sample.tsv`. The fasta sequences then should be aligned to the reference genome by minimap and converted to cram format by samtools.
 
-TODO into folder `profiles/`, files `metadata.tsv` and `gisaid.cram`
+```bash
+../src/gisaid/process_gisaid.pl metadata_tsv_2022_04_25.tar.xz sequences_fasta_2022_04_25.tar.xz metadata_sample.tsv gisaid_sample.fasta.gz
+
+minimap2 -a -x asm5 -t 8 ../../data/genome.fa  gisiad_sample.fasta.gz | samtools view -S -C -T ../data/genome.fa - > gisaid_sample.cram
+```
 
 ### Estimate a profile
 
@@ -144,7 +148,7 @@ Then, the profile is calculated by a following command:
 conda activate virpool
 
 cd profiles
-python ../src/profile_estimation.py variant_list.txt aliases.json metadata.tsv gisaid.cram \
+python ../src/profile_estimation.py variant_list.txt aliases.json metadata_sample.tsv gisaid_sample.cram \
     --reference ../data/genome.fa \
     -o profile_name.tsv \
     --date-min 2020-01-01 \
