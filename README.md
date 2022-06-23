@@ -1,5 +1,10 @@
 # VirPool
 
+VirPool: Model-Based Estimation of SARS-CoV-2 Variant Proportions in Wastewater Samples
+
+See our preprint https://www.medrxiv.org/content/10.1101/2022.06.21.22276717v1
+
+
 ## Installation
 
 ```bash
