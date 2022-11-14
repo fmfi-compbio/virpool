@@ -17,14 +17,14 @@ rule subsample_bam_simple:
     output:
         bam=temp(join(target_dir, "subsampled", "{sample}_{coverage}_{snum}.bam")),
         written_alignment=temp(join(target_dir, "subsampled_count", "{sample}_{coverage}_{snum}.txt"))
-    shell: """python ../../src/subsample_bam.py {input} {output.bam} {params.coverage} --sampled-reads-count-filename {output.written_alignment} """
+    shell: """python subsample_bam.py {input} {output.bam} {params.coverage} --sampled-reads-count-filename {output.written_alignment} """
 
 rule mix_major_and_minor:
     input:
         major=lambda w: join(target_dir, "subsampled", f"{w['sample1']}_{total_coverage * (1 - float(w['minor_proportion']))}_{w['snum']}.bam"),
         minor=lambda w: join(target_dir, "subsampled", f"{w['sample2']}_{total_coverage * float(w['minor_proportion'])}_{w['snum']}.bam")
     output: join(target_dir, "{sample1}_{sample2}_{minor_proportion}_{snum}.bam")
-    shell: """python ../../src/merge_bams.py {input} -o {output} """
+    shell: """python merge_bams.py {input} -o {output} """
 
 rule count_true_minor_proportion:
     input:
