@@ -1,0 +1,8 @@
+# everything except other
+ont-long-1: ['ol2', 'ol3', 'ol4', 'ol5', 'ol6', 'ol8', 'ol9' ]
+# everything including other
+ont-long-2: ['ol1', 'ol2', 'ol3', 'ol4', 'ol5', 'ol6', 'ol8', 'ol9' ]
+# B.1.1.7 (UK), B.1.258 (CZ), B.1.1.170 (UKBA318 - other)
+ont-long-3: ['ol1', 'ol2', 'ol3', 'ol8', 'ol9']
+# B.1.177 (EU1), B.1.160 (EU2)
+ont-long-4: ['ol4', 'ol5', 'ol6']

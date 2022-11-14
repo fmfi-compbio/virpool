@@ -1,0 +1,8 @@
+# everything except other
+ont-short-1: ['os1', 'os3', 'os4',  'os5', 'os6', 'os8',  'os11', ]
+# everything including other
+ont-short-2: ['os1', 'os2', 'os3', 'os4', 'os5', 'os6','os7','os8', 'os9','os10', 'os11',  ]
+# B.1.1.7 (UK), B.1.258 (CZ), B.1.1.37 (other), B.1.1.367 (other), B.1.221 (other)
+ont-short-3: [ 'os2','os7','os8', 'os9','os10', 'os11',  ]
+# B.1.177 (EU1), B.1.160 (EU2)
+ont-short-4: ['os1',  'os3', 'os4', 'os5', 'os6', ]

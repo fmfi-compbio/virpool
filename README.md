@@ -159,3 +159,7 @@ python ../src/profile_estimation.py variant_list.txt aliases.json metadata_sampl
     --date-min 2020-01-01 \
     --date-max 2022-12-31
 ```
+
+## Synthetic data used in the paper
+
+See `generate_synthetic_data` folder.

@@ -1,0 +1,6 @@
+# everything except other
+ont-short-b1160: ['os1', 'os3', 'os4']
+ont-short-other: ['os2', 'os7', 'os9', 'os10']
+ont-short-b1177: ['os5', 'os6']
+ont-short-b1258: ['os8']
+ont-short-b117: ['os11']
