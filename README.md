@@ -4,7 +4,7 @@ VirPool: Model-Based Estimation of SARS-CoV-2 Variant Proportions in Wastewater 
 
 Please cite as follows:
 
-Gafurov, A., Baláž, A., Amman, F. et al. VirPool: model-based estimation of SARS-CoV-2 variant proportions in wastewater samples. BMC Bioinformatics 23, 551 (2022). https://doi.org/10.1186/s12859-022-05100-3
+Askar Gafurov, Andrej Balaz, Fabian Amman, Kristina Borsova, Viktoria Cabanova, Boris Klempa, Andreas Bergthaler, Tomas Vinar, Brona Brejova. VirPool: model-based estimation of SARS-CoV-2 variant proportions in wastewater samples. BMC Bioinformatics 23, 551 (2022). https://doi.org/10.1186/s12859-022-05100-3
 
 
 
