@@ -117,10 +117,8 @@ sub read_metadata {
 	my @parts = split "\t", $line;  # split to columns
 	next if @parts==0;  # skip empty lines
 	
-        # >>> added by Askar
         next if @parts < 24;
-        die "bad line $line (expected 24 columns)" unless @parts == 24;  # check that we have 22 columns
-        # <<< added by Askar
+        die "bad line $line (expected 24 columns)" unless @parts == 24;  # check that we have 24 columns
 	
         my ($name, $date, $ncount, $seq_len) = @parts[0, 5, 22, 8];  # store needed columns to variables
 	
