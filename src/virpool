@@ -12,7 +12,7 @@ import helpers
 from helpers import load_variants_with_simple_alphabet, load_alignments, load_virus_genome
 from plot_posterior_coverage import plot_posterior_coverage
 from plot_significant_coverage import find_significant_positions, plot_significant_coverage
-from posteriors_simple import posteriors_simple, dump_posteriors_as_np
+from posteriors_simple import posteriors_simple, dump_posteriors_as_np, dump_posteriors
 from predictor_whole_reads import find_best_weights, estimate_weights_multiple_tries
 
 DEFAULT_GENOME = "resources/genome.fa"
@@ -33,6 +33,7 @@ DEFAULT_OUTPUT_DIR = f"results-{datetime.now().strftime('%Y%m%dT%H%M%S')}"
 @argh.arg("-m", "--masking-vcf", help="VCF file with positions to be masked (e.g. homeoplasic sites or primers); "
                                       "the sixth column should contain keyword 'mask'")
 @argh.arg("--percentile", help="Punish gaps with coverage < `percentile` quantile for the given variant")
+@argh.arg("--dump-read-posteriors", help="Print individual read posteriors into a file <output_dir>/posteriors.tsv")
 def main(reads,
          output_dir=DEFAULT_OUTPUT_DIR,
          variants=DEFAULT_VARIANT,
@@ -43,11 +44,13 @@ def main(reads,
          clipping_start: int = 0,
          clipping_end: int = 0,
          masking_vcf=None,
-         percentile: float = 0.0):
+         percentile: float = 0.0,
+         dump_read_posteriors: bool = False):
     #  some constants
     weights_output_filename = os.path.join(output_dir, "estimated_weights.yaml")
     plot_posterior_output_filename = os.path.join(output_dir, "posterior_coverage.svg")
     plot_significant_output_filename = os.path.join(output_dir, "significant_positions.svg")
+    read_posteriors_output_filename = os.path.join(output_dir, "posteriors.tsv")
 
     # load input data
     variant_names, table = helpers.load_variants_with_simple_alphabet_punish_gaps(variants, percentile)
@@ -71,6 +74,12 @@ def main(reads,
                                           subst_rate=subst_rate, threads=threads,
                                           clipping_start=clipping_start, clipping_end=clipping_end,
                                           masked_positions=masked_positions)
+
+    if dump_read_posteriors:
+        merged_posteriors = list(merged_posteriors)
+        with open(read_posteriors_output_filename, "w", newline="") as f:
+            dump_posteriors(variant_names, merged_posteriors, f)
+
     identifiers, posteriors = dump_posteriors_as_np(merged_posteriors)
 
     #  optimise model
